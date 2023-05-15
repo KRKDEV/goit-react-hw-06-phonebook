@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   contacts: [],
-  filter: '',
+  // filter: '',
 };
 
 const contactsSlice = createSlice({
@@ -17,15 +17,9 @@ const contactsSlice = createSlice({
         contact => contact.id !== action.payload
       );
     },
-    setFilter: (state, action) => {
-      state.filter = action.payload;
-    },
   },
 });
 
-export const { addContact, deleteContact, setFilter } = contactsSlice.actions;
-
-export const selectContacts = state => state.contacts.contacts;
-export const selectFilter = state => state.contacts.filter;
-
-export default contactsSlice.reducer;
+export const { addContact, deleteContact } = contactsSlice.actions;
+export const contactsReducer = contactsSlice.reducer;
+export const getContacts = state => state.contacts.contacts;
