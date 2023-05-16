@@ -2,6 +2,7 @@ import css from './App.module.css';
 import Form from './Form/Form';
 import Filter from './Filter/Filter';
 import ContactList from './Contacts/Contacts';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact, deleteContact, getContacts } from '../redux/contactsSlice';
 import { setStatusFilter, getStatusFilter } from 'redux/filtersSlice';
@@ -10,6 +11,14 @@ export const App = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getStatusFilter);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const savedContacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(savedContacts);
+    if (parsedContacts) {
+      window.localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
+  }, [contacts]);
 
   const handleSubmit = contact => {
     dispatch(addContact(contact));
