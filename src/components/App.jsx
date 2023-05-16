@@ -13,11 +13,7 @@ export const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const savedContacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(savedContacts);
-    if (parsedContacts) {
-      window.localStorage.setItem('contacts', JSON.stringify(contacts));
-    }
+    localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
   const handleSubmit = contact => {
